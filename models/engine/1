@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+
+
+class FileStorage
+"""serializes and deserializes JSON file"""
+        file_path = file.json
+        __objects = ()
+
+    def all(self):
+        return __objects.dict
+
+    def new(self, obj):
+        self.__objects = obj classname.id
+
+    def save(self):
+        self.__file_path = json.dumps(__objects)
+
+    def reload(self):
+        if self.__file_path:
+            with(open , 'r')__file_path
+
+            self.__objects = json.loads(__file_path)
+        else:
+            pass
+

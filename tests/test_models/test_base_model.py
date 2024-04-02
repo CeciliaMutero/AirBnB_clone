@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import unittest
 from models.base_model import BaseModel
+from models import storage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -38,6 +39,25 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_new_model.my_number, my_model.my_number)
 
         self.assertIsNot(my_model, my_new_model)
+
+    def test_file_storage_save_reload(self):
+        """
+        Test saving and reloading of objects using FileStorage.
+        """
+        my_model = BaseModel()
+        my_model.name = "My_First_Model"
+        my_model.my_number = 89
+        my_model.save()
+
+        all_objs = storage.all()
+        self.assertIn(my_model.id, all_objs)
+
+        reloaded_model = all_objs[my_model.id]
+        self.assertEqual(my_model.id, reloaded_model.id)
+        self.assertEqual(my_model.created_at, reloaded_model.created_at)
+        self.assertEqual(my_model.updated_at, reloaded_model.updated_at)
+        self.assertEqual(my_model.name, reloaded_model.name)
+        self.assertEqual(my_model.my_number, reloaded_model.my_number)
 
 
 if __name__ == '__main__':
