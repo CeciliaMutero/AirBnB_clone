@@ -4,6 +4,11 @@ import cmd
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -33,6 +38,16 @@ class HBNBCommand(cmd.Cmd):
             class_name = args[0]
             if class_name == 'User':
                 new_instance = User()
+            elif class_name == 'State':
+                new_instance = State()
+            elif class_name == 'City':
+                new_instance = City()
+            elif class_name == 'Place':
+                new_instance = Place()
+            elif class_name == 'Amenity':
+                new_instance = Amenity()
+            elif class_name == 'Review':
+                new_instance = Review()
             else:
                 new_instance = storage.classes[class_name]()
             new_instance.save()

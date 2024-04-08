@@ -1,13 +1,27 @@
 #!/usr/bin/python3
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
     """serializes and deserializes JSON file"""
     __file_path = "file.json"
     __objects = {}
-    classes = {"BaseModel": BaseModel}
+    classes = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "State": State,
+            "City": City,
+            "Place": Place,
+            "Amenity": Amenity,
+            "Review": Review
+            }
 
     def all(self):
         """Returns the dictionary __objects."""
@@ -34,10 +48,8 @@ class FileStorage:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name, obj_id = key.split('.')
-                    if class_name == 'User':
-                        self.__objects[key] = User(**value)
-                    else:
-                        self.__objects[key] = BaseModel(**value)
+                    obj_class = self.classes.get(class_name, BaseModel)
+                    self.__objects[key] = obj_class(**value)
         except FileNotFoundError:
             pass
         except json.decoder.JSONDecodeError:
