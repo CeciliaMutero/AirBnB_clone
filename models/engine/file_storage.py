@@ -34,7 +34,10 @@ class FileStorage:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name, obj_id = key.split('.')
-                    self.__objects[key] = globals()[class_name](**value)
+                    if class_name == 'User':
+                        self.__objects[key] = User(**value)
+                    else:
+                        self.__objects[key] = BaseModel(**value)
         except FileNotFoundError:
             pass
         except json.decoder.JSONDecodeError:

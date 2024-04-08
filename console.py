@@ -3,6 +3,7 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -30,7 +31,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             class_name = args[0]
-            new_instance = storage.classes[class_name]()
+            if class_name == 'User':
+                new_instance = User()
+            else:
+                new_instance = storage.classes[class_name]()
             new_instance.save()
             print(new_instance.id)
 
