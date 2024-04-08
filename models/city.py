@@ -7,7 +7,7 @@ class City(BaseModel):
     """defines class city"""
     def __init__(self, *args, **kwargs):
         """initializes city instance"""
-        super().__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.state_id = kwargs.get('state.id', '')
         self.name = kwargs.get('name', '')
 

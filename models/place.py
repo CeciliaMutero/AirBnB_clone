@@ -7,7 +7,7 @@ class Place(BaseModel):
     """defines place"""
     def __init__(self, *args, **kwargs):
         """initializes place instance"""
-        super().__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.city_id = kwargs.get('city_id', '')
         self.user_id = kwargs.get('user_id', '')
         self.name = kwargs.get('name', '')
