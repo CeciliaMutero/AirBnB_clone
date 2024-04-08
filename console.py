@@ -101,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
                     if type(instance).__name__ == arg:
                         instances.append(str(instance))
         else:
-            for instance in models.storage.all().values():
+            for instance in storage.all().values():
                 instances.append(str(instance))
         if instances:
             print(instances)
