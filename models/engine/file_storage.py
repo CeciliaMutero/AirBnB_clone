@@ -7,6 +7,7 @@ class FileStorage:
     """serializes and deserializes JSON file"""
     __file_path = "file.json"
     __objects = {}
+    classes = {"BaseModel": BaseModel}
 
     def all(self):
         """Returns the dictionary __objects."""
@@ -36,3 +37,5 @@ class FileStorage:
                     self.__objects[key] = globals()[class_name](**value)
         except FileNotFoundError:
             pass
+        except json.decoder.JSONDecodeError:
+            print("Error: The JSON file is empty or contains invalid data.")
